@@ -1,0 +1,54 @@
+USE DotNetCourseDatabase;
+GO
+
+CREATE SCHEMA Blog;
+
+
+CREATE TABLE Blog.Users
+(
+    UserId INT IDENTITY(1, 1) PRIMARY KEY
+    , FirstName NVARCHAR(50)
+    , LastName NVARCHAR(50)
+    , Email NVARCHAR(50)
+    , Gender NVARCHAR(50)
+    , Active BIT
+);
+
+
+CREATE TABLE Blog.Auth(
+	Email NVARCHAR(50) PRIMARY KEY,
+	PasswordHash VARBINARY(MAX),
+	PasswordSalt VARBINARY(MAX)
+)
+
+select * from Blog.Users;
+
+TRUNCATE TABLE Blog.Auth;
+
+CREATE TABLE Blog.Posts (
+    PostId INT IDENTITY(1,1),
+    UserId INT,
+    PostTitle NVARCHAR(255),
+    PostContent NVARCHAR(MAX),
+    PostCreated DATETIME,
+    PostUpdated DATETIME
+)
+
+select * from Blog.Posts; 
+
+CREATE TABLE Blog.Commentary (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    PostId INT,
+    UserId INT,
+    CommentText TEXT,
+    CommentCreated DATETIME,
+    CommentUpdated DATETIME
+);
+
+CREATE TABLE Blog.Vote (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    PostId INT,
+    CommentaryId Int,
+    UserId INT,
+    Up BIT
+);
