@@ -1,0 +1,7 @@
+.new-comment-container {
+    width: 500px;
+    background-color: lightgray;
+    border: 1px solid black;
+    margin: 0 auto; /* Center horizontally */
+    padding: 10px; /* Add padding for better appearance */
+  }

@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput placeholder="Post Title" [(ngModel)]="postTitle" name="postTitle" required #postTitleInput>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <textarea matInput placeholder="Post Content" [(ngModel)]="postContent" name="postContent" required #postContentTextarea></textarea>
+    </mat-form-field>
+    <br />
+    <button mat-raised-button color="primary" type="submit">Save</button>
+  </form>

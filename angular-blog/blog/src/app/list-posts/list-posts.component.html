@@ -1,0 +1,63 @@
+<div>
+    <mat-form-field appearance="fill">
+      <mat-label>Filter</mat-label>
+      <mat-select [(value)]="selectedFilter" (selectionChange)="onFilterChange()">
+        <mat-option value="my-posts">My Posts</mat-option>
+        <mat-option value="all">All</mat-option>
+      </mat-select>
+    </mat-form-field>
+</div>
+
+<div *ngIf="posts" fxLayout="row" fxLayoutAlign="center">
+    <h2>List of Posts</h2>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <div *ngFor="let post of posts">
+        <mat-card  style="width: 768px;position:relative">
+          <mat-card-header>
+            <mat-card-title>{{ post.post.postTitle }}</mat-card-title>
+            <mat-card-title>{{ post.post.user.firstName }} {{ post.post.user.lastName }}</mat-card-title>
+            <mat-card-subtitle>{{ post.post.postUpdated | date:'medium' }}</mat-card-subtitle>
+            <div style="position: absolute; top: 0; right: 0;">
+             <a [routerLink]="['/edit-post', post.post.postId]" >Edit Post</a>
+              <button mat-icon-button color="warn" (click)="deleteCommentary(post.post.postId)" style="margin: 20px;">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ post.post.postContent }}</p>
+          </mat-card-content>
+          <mat-card-actions  style="display: flex; justify-content: space-between;">
+            <div style="position: absolute; bottom: 0; right: 0;">
+                <button mat-icon-button color="primary" (click)="votePost(post.post.postId, true)" >
+                  <mat-icon>thumb_up</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="votePost(post.post.postId, false)">
+                  <mat-icon>thumb_down</mat-icon>
+                </button>
+                <span class="vote-count">{{ getPostUpvotes(post) }}</span>
+              </div>
+          </mat-card-actions>
+        </mat-card>
+        <div *ngFor="let commentary of post.commentaries" class="commentary-container" style="width: 500px; margin-top: 30px;position: relative;">
+          <div class="commentary-text">{{ commentary.user.firstName }} {{ commentary.user.lastName }}</div>
+          <div class="commentary-text">{{ commentary.commentText }}</div>
+          <div class="commentary-info">{{ commentary.commentUpdated | date:'medium' }}</div>
+          <div style="position: absolute; bottom: 0; right: 0;">
+            <button mat-icon-button color="warn" (click)="deleteCommentary(commentary.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="voteComment(commentary.id, true)" >
+              <mat-icon>thumb_up</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="voteComment(commentary.id, false)">
+              <mat-icon>thumb_down</mat-icon>
+            </button>
+            
+            <span class="vote-count">{{ getCommentUpvotes(commentary) }}</span>
+          </div>
+        </div>
+        <app-add-comment (addCommentEvent)="addComment($event, post.post.postId)" ></app-add-comment>
+      </div>
+    </div>
+  </div>

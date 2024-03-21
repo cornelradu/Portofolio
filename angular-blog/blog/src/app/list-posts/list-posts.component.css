@@ -1,0 +1,46 @@
+mat-card {
+    width: 300px;
+    margin-bottom: 20px;
+    margin: 0 10px; 
+
+  }
+  
+  mat-card-content {
+    height: 100px;
+    overflow: hidden;
+  }
+
+  .container {
+    margin: 20px;
+  }
+  
+  .commentary-container {
+    width: 500px;
+  background-color: lightgray;
+  border: 1px solid black;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.commentary-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+.commentary-info {
+    font-size: 14px;
+    color: #666;
+}
+
+.vote-count {
+  display: inline-block;
+  width: 30px; /* Adjust size of the circle */
+  height: 30px; /* Adjust size of the circle */
+  background-color: red;
+  color: white;
+  border-radius: 50%; /* Make it a circle */
+  text-align: center;
+  line-height: 30px; /* Center text vertically */
+  margin: 10px;
+}
